@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import VintedButton from "./VintedButton";
 import OfferItem from "./OfferItem";
 
-const MainHome = ({ isLoading, offers }) => {
-  console.log(offers);
+const MainHome = ({ isLoadingHome, offers }) => {
   return (
     <main className="main-home-comp">
       <div className="wrapper">
@@ -23,7 +22,7 @@ const MainHome = ({ isLoading, offers }) => {
         </div>
         {/* MainHome Offers */}
         <div className="offer-list">
-          {isLoading
+          {isLoadingHome
             ? "En cours de chargement ..."
             : offers.offers.map((offer, index) => {
                 return (

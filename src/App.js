@@ -1,36 +1,33 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import axios from "axios";
+
 import Home from "./containers/Home";
 import Offer from "./containers/Offer";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingHome, setIsLoadingHome] = useState(true);
+  const [isLoadingOffer, setIsLoadingOffer] = useState(true);
   const [offers, setOffers] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://localhost:3001/offers");
-      setOffers(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  const [selectedOffer, setSelectedOffer] = useState({});
   return (
     <Router>
       <Switch>
-        <Router path="/offer/:id">
-          <Offer />
-        </Router>
+        <Route path="/offer/:id">
+          <Offer
+            isLoadingOffer={isLoadingOffer}
+            setIsLoadingOffer={setIsLoadingOffer}
+            selectedOffer={selectedOffer}
+            setSelectedOffer={setSelectedOffer}
+          />
+        </Route>
         <Route path="/">
-          <Home isLoading={isLoading} offers={offers} />
+          <Home
+            isLoadingHome={isLoadingHome}
+            setIsLoadingHome={setIsLoadingHome}
+            offers={offers}
+            setOffers={setOffers}
+          />
         </Route>
       </Switch>
     </Router>
