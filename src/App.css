@@ -15,6 +15,9 @@ body {
 h2 {
   font-size: 35px;
 }
+::placeholder {
+  color: #bbbbbb;
+}
 
 /* COMMUN */
 /* Header */
@@ -22,6 +25,7 @@ h2 {
   position: sticky;
   top: 0;
   background-color: #fff;
+  z-index: 1;
 }
 .header-container {
   width: 100%;
@@ -38,14 +42,23 @@ h2 {
   width: 80px;
   margin-right: 50px;
 }
+.search-container {
+  position: relative;
+}
 .site-search {
   border: none;
-  height: 30px;
-  width: 280px;
+  height: 35px;
+  width: 300px;
   font-size: 16px;
-  padding: 0 20px;
+  padding: 0 30px;
   background-color: #f5f6f7;
   border-radius: 5px;
+}
+.search-icon {
+  color: #bbbbbb;
+  position: absolute;
+  left: 8px;
+  top: 9px;
 }
 .sign-button,
 .sell-button {
@@ -73,14 +86,24 @@ h2 {
 .main-home-comp {
   width: 100%;
   height: 500px;
-  background-color: blue;
+  /* background: url("https://images.vinted.net/thumbs/2560x1441/01_02445_h4cWoccP4qQVVwScboeLTTE1.jpeg?1597418184-7a15687babec3eb1b2bfc88a47c8cb31f2827caa") */
+  /* center; */
+  position: relative;
 }
 /* Main Home Banner */
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .main-home-banner {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
+  position: absolute;
+  /* background-color: chocolate; */
+  top: 0;
 }
 .start-sell-container {
   height: 60%;
@@ -107,8 +130,13 @@ h2 {
   color: #fff;
   font-weight: 300;
 }
+.tear-img {
+  position: absolute;
+  bottom: 0;
+}
 
 /* MainHome Offers*/
+
 .offer-list {
   width: 100%;
   display: flex;
@@ -116,6 +144,11 @@ h2 {
   justify-content: space-between;
   flex-wrap: wrap;
   color: black;
+}
+.offer-item-user {
+  padding: 10px;
+  color: #7b7b7b;
+  font-size: 13px;
 }
 .offer-item-photo {
   width: 220px;
@@ -126,6 +159,14 @@ h2 {
 .offer-item-details {
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  font-weight: 300;
+  font-size: 14px;
+  color: #000;
+}
+.offer-item-details span:not(:first-child) {
+  color: #7b7b7b;
 }
 
 /* OFFER PAGE */

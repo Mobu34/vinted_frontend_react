@@ -4,8 +4,6 @@ import VintedButton from "./VintedButton";
 import OfferDetail from "./OfferDetail";
 
 const MainOffer = ({ selectedOffer }) => {
-  console.log(selectedOffer);
-
   return (
     <div className="main-offer-comp">
       <div className="wrapper">

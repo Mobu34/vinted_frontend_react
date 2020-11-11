@@ -12,20 +12,21 @@ const Offer = ({
   setSelectedOffer,
 }) => {
   const { id } = useParams();
-
-  const fetchOffer = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/offer?id=${id}`);
-      setSelectedOffer(response.data);
-      setIsLoadingOffer(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchOffer = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/offer?id=${id}`
+        );
+        setSelectedOffer(response.data);
+        setIsLoadingOffer(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchOffer();
-  }, []);
+  }, [setSelectedOffer, setIsLoadingOffer, id]);
 
   return (
     <div className="offer-page">

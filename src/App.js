@@ -5,6 +5,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 import Offer from "./containers/Offer";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+library.add(faSearch);
+
 const App = () => {
   const [isLoadingHome, setIsLoadingHome] = useState(true);
   const [isLoadingOffer, setIsLoadingOffer] = useState(true);

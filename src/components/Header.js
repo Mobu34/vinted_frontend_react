@@ -3,6 +3,8 @@ import React from "react";
 import VintedLogo from "../assets/img/VintedLogo.png";
 import VintedButton from "./VintedButton";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Header = () => {
   return (
     <header className="header-comp">
@@ -10,12 +12,15 @@ const Header = () => {
         <div className="header-container">
           <div className="header-div1">
             <img src={VintedLogo} alt="vinted-logo" className="vinted-logo" />
-            <input
-              type="text"
-              name="site-search"
-              className="site-search"
-              placeholder="Recherche des articles"
-            />
+            <div className="search-container">
+              <input
+                type="text"
+                name="site-search"
+                className="site-search"
+                placeholder="Recherche des articles"
+              />
+              <FontAwesomeIcon icon="search" className="search-icon" />
+            </div>
           </div>
           <div className="header-div2">
             <VintedButton className="sign-button" text="S'inscire" />
