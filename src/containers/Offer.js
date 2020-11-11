@@ -16,7 +16,7 @@ const Offer = ({
     const fetchOffer = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/offer?id=${id}`
+          `https://vinted-react.herokuapp.com/offer?id=${id}`
         );
         setSelectedOffer(response.data);
         setIsLoadingOffer(false);

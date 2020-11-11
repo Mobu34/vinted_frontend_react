@@ -8,7 +8,9 @@ const Home = ({ isLoadingHome, setIsLoadingHome, offers, setOffers }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/offers");
+        const response = await axios.get(
+          "https://vinted-react.herokuapp.com/offers"
+        );
         setOffers(response.data);
         setIsLoadingHome(false);
       } catch (error) {
