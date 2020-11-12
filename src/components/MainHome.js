@@ -6,7 +6,7 @@ import OfferItem from "./OfferItem";
 
 import tear from "../assets/img/tear.svg";
 
-const MainHome = ({ isLoadingHome, offers }) => {
+const MainHome = ({ isLoading, offers }) => {
   return (
     <main className="main-home-comp">
       <img
@@ -30,7 +30,7 @@ const MainHome = ({ isLoadingHome, offers }) => {
         </div>
         {/* MainHome Offers */}
         <div className="offer-list">
-          {isLoadingHome
+          {isLoading
             ? "En cours de chargement ..."
             : offers.offers.map((offer, index) => {
                 return (

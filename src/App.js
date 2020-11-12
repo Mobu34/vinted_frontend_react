@@ -1,7 +1,8 @@
 import "./App.css";
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Header from "./components/Header";
 import Home from "./containers/Home";
 import Offer from "./containers/Offer";
 
@@ -10,31 +11,15 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 library.add(faSearch);
 
 const App = () => {
-  const [isLoadingHome, setIsLoadingHome] = useState(true);
-  const [isLoadingOffer, setIsLoadingOffer] = useState(true);
-  const [offers, setOffers] = useState([]);
-  const [selectedOffer, setSelectedOffer] = useState({});
   return (
     <Router>
+      <Header />
       <Switch>
         <Route path="/offer/:id">
-          <Offer
-            isLoadingOffer={isLoadingOffer}
-            setIsLoadingOffer={setIsLoadingOffer}
-            selectedOffer={selectedOffer}
-            setSelectedOffer={setSelectedOffer}
-            setIsLoadingHome={setIsLoadingHome}
-          />
+          <Offer />
         </Route>
         <Route path="/">
-          <Home
-            isLoadingHome={isLoadingHome}
-            setIsLoadingHome={setIsLoadingHome}
-            offers={offers}
-            setOffers={setOffers}
-            setSelectedOffer={setSelectedOffer}
-            setIsLoadingOffer={setIsLoadingOffer}
-          />
+          <Home />
         </Route>
       </Switch>
     </Router>

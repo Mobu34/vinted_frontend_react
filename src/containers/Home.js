@@ -1,39 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import Header from "../components/Header";
 import MainHome from "../components/MainHome";
 
-const Home = ({
-  isLoadingHome,
-  setIsLoadingHome,
-  offers,
-  setOffers,
-  setSelectedOffer,
-  setIsLoadingOffer,
-}) => {
+const Home = ({}) => {
+  const [offers, setOffers] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://vinted-react.herokuapp.com/offers"
-        );
+        const response = await axios.get("http://localhost:3001/offers");
         setOffers(response.data);
-        setIsLoadingHome(false);
-        setSelectedOffer({});
-        setIsLoadingOffer(true);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchData();
-  }, [setOffers, setIsLoadingHome]);
+  }, [setOffers, setIsLoading]);
 
   return (
     <div className="home-page">
-      <Header />
-      <MainHome isLoadingHome={isLoadingHome} offers={offers} />
+      <MainHome isLoading={isLoading} offers={offers} />
     </div>
   );
 };

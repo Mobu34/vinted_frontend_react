@@ -1,43 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import Header from "../components/Header";
 import MainOffer from "../components/MainOffer";
 
-const Offer = ({
-  isLoadingOffer,
-  setIsLoadingOffer,
-  selectedOffer,
-  setSelectedOffer,
-  setIsLoadingHome,
-}) => {
+const Offer = ({}) => {
+  const [offer, setOffer] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   useEffect(() => {
     const fetchOffer = async () => {
       try {
         const response = await axios.get(
-          `https://vinted-react.herokuapp.com/offer?id=${id}`
+          `http://localhost:3001/offer?id=${id}`
         );
-        setSelectedOffer(response.data);
-        setIsLoadingOffer(false);
-        setIsLoadingHome(true);
+        setOffer(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchOffer();
-  }, [setSelectedOffer, setIsLoadingOffer, id]);
+  }, [setOffer, setIsLoading, id]);
 
   return (
     <div className="offer-page">
-      <Header />
-      {isLoadingOffer ? (
-        "Chargement en cours ..."
-      ) : (
-        <MainOffer selectedOffer={selectedOffer} />
-      )}
+      {isLoading ? "Chargement en cours ..." : <MainOffer offer={offer} />}
     </div>
   );
 };
