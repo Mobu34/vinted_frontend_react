@@ -10,6 +10,7 @@ const Offer = ({
   setIsLoadingOffer,
   selectedOffer,
   setSelectedOffer,
+  setIsLoadingHome,
 }) => {
   const { id } = useParams();
   useEffect(() => {
@@ -20,6 +21,7 @@ const Offer = ({
         );
         setSelectedOffer(response.data);
         setIsLoadingOffer(false);
+        setIsLoadingHome(true);
       } catch (error) {
         console.log(error);
       }

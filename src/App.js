@@ -23,6 +23,7 @@ const App = () => {
             setIsLoadingOffer={setIsLoadingOffer}
             selectedOffer={selectedOffer}
             setSelectedOffer={setSelectedOffer}
+            setIsLoadingHome={setIsLoadingHome}
           />
         </Route>
         <Route path="/">
@@ -31,6 +32,8 @@ const App = () => {
             setIsLoadingHome={setIsLoadingHome}
             offers={offers}
             setOffers={setOffers}
+            setSelectedOffer={setSelectedOffer}
+            setIsLoadingOffer={setIsLoadingOffer}
           />
         </Route>
       </Switch>

@@ -4,7 +4,14 @@ import axios from "axios";
 import Header from "../components/Header";
 import MainHome from "../components/MainHome";
 
-const Home = ({ isLoadingHome, setIsLoadingHome, offers, setOffers }) => {
+const Home = ({
+  isLoadingHome,
+  setIsLoadingHome,
+  offers,
+  setOffers,
+  setSelectedOffer,
+  setIsLoadingOffer,
+}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -13,6 +20,8 @@ const Home = ({ isLoadingHome, setIsLoadingHome, offers, setOffers }) => {
         );
         setOffers(response.data);
         setIsLoadingHome(false);
+        setSelectedOffer({});
+        setIsLoadingOffer(true);
       } catch (error) {
         console.log(error);
       }
