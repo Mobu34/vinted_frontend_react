@@ -1,9 +1,13 @@
 import React from "react";
+import Cookie from "js-cookie";
 
-const VintedButton = ({ className, text, setModalLogin, type }) => {
+const VintedButton = ({ className, text, setModalLogin, setToken, type }) => {
   const handleClick = () => {
     if (setModalLogin) {
       setModalLogin(true);
+    } else if (setToken) {
+      Cookie.remove("tokenCookie");
+      setToken("");
     }
   };
   return (

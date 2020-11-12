@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Cookie from "js-cookie";
 
 import Header from "./components/Header";
-import Home from "./containers/Home";
 import Offer from "./containers/Offer";
+import Signup from "./containers/Signup";
+import Home from "./containers/Home";
 import Modal from "./components/Modal";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -24,10 +25,13 @@ const App = () => {
 
   return (
     <Router>
-      <Header setModalLogin={setModalLogin} token={token} />
+      <Header setModalLogin={setModalLogin} token={token} setToken={setToken} />
       <Switch>
         <Route path="/offer/:id">
           <Offer />
+        </Route>
+        <Route path="/signup">
+          <Signup connect={connect} />
         </Route>
         <Route path="/">
           <Home />

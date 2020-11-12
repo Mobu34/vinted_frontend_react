@@ -5,7 +5,7 @@ import VintedButton from "./VintedButton";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Header = ({ setModalLogin, token }) => {
+const Header = ({ setModalLogin, token, setToken }) => {
   return (
     <header className="header-comp">
       <div className="wrapper">
@@ -24,7 +24,11 @@ const Header = ({ setModalLogin, token }) => {
           </div>
           <div className="header-div2">
             {token ? (
-              <VintedButton className="logout-button" text="Se déconnecter" />
+              <VintedButton
+                className="logout-button"
+                text="Se déconnecter"
+                setToken={setToken}
+              />
             ) : (
               <>
                 {/* <VintedButton className="sign-button" text="S'inscire" /> */}

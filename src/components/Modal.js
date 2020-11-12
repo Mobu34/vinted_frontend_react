@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import TitleForm from "./TitleForm";
 import InputForm from "./InputForm";
 import VintedButton from "./VintedButton";
-import RedirectFrom from "./RedirectForm";
+import RedirectForm from "./RedirectForm";
 
 const Modal = ({ setModalLogin, connect }) => {
   const [login, setLogin] = useState("");
@@ -15,13 +16,21 @@ const Modal = ({ setModalLogin, connect }) => {
     const regex = new RegExp("@", "i");
     let loginType = regex.test(login) ? "email" : "username";
 
-    const response = await axios.post("http://localhost:3001/user/login", {
-      [loginType]: login,
-      password: password,
-    });
+    try {
+      const response = await axios.post("http://localhost:3001/user/login", {
+        [loginType]: login,
+        password: password,
+      });
 
-    connect(response.data);
-    setModalLogin(false);
+      if (response.status === 200) {
+        connect(response.data);
+        setModalLogin(false);
+      }
+    } catch (error) {
+      alert("Incorrect");
+    }
+
+    // console.log(response.status);
   };
 
   return (
@@ -43,7 +52,12 @@ const Modal = ({ setModalLogin, connect }) => {
           className="login-button"
           type="submit"
         />
-        <RedirectFrom text="Pas encore de compte ? Inscris-toi !" />
+        <Link to="/signup" className="link">
+          <RedirectForm
+            text="Pas encore de compte ? Inscris-toi !"
+            setModalLogin={setModalLogin}
+          />
+        </Link>
       </form>
     </div>
   );
