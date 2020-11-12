@@ -61,7 +61,8 @@ h2 {
   top: 9px;
 }
 .sign-button,
-.sell-button {
+.sell-button,
+.logout-button {
   height: 30px;
   width: 130px;
   border-radius: 5px;
@@ -80,6 +81,11 @@ h2 {
   border: none;
   margin-left: 40px;
   color: #fff;
+}
+.logout-button {
+  background-color: #c1175b;
+  color: #fff;
+  border: none;
 }
 
 /* HOME PAGE */

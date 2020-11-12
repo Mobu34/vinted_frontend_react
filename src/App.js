@@ -22,10 +22,9 @@ const App = () => {
     setToken(tokenCookie);
   };
 
-  console.log(token);
   return (
     <Router>
-      <Header setModalLogin={setModalLogin} />
+      <Header setModalLogin={setModalLogin} token={token} />
       <Switch>
         <Route path="/offer/:id">
           <Offer />
