@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 import VintedButton from "./VintedButton";
 import OfferItem from "./OfferItem";
+import Page from "./Page";
 
 import tear from "../assets/img/tear.svg";
 
-const MainHome = ({ isLoading, offers }) => {
+const MainHome = ({ isLoading, offers, pages, setPages, page, setPage }) => {
   return (
     <main className="main-home-comp">
       <img
@@ -43,6 +44,20 @@ const MainHome = ({ isLoading, offers }) => {
                   </Link>
                 );
               })}
+        </div>
+        <div className="page-container">
+          {pages.map((item, index) => {
+            return (
+              <Page
+                key={index}
+                item={item}
+                setPages={setPages}
+                page={page}
+                setPage={setPage}
+                dash={pages.length - 1 !== index && "-"}
+              />
+            );
+          })}
         </div>
       </div>
     </main>

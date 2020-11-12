@@ -110,7 +110,6 @@ h2 {
   display: flex;
   align-items: center;
   position: absolute;
-  /* background-color: chocolate; */
   top: 0;
 }
 .start-sell-container {
@@ -141,7 +140,6 @@ h2 {
 .tear-img {
   position: absolute;
   bottom: 0;
-  /* width: 100px; */
 }
 
 /* MainHome Offers*/
@@ -150,9 +148,11 @@ h2 {
   width: 100%;
   display: flex;
   margin-top: 40px;
-  justify-content: space-between;
   flex-wrap: wrap;
   color: black;
+}
+.offer-item {
+  margin: 0 10px;
 }
 .offer-item-user {
   padding: 10px;
@@ -176,6 +176,17 @@ h2 {
 }
 .offer-item-details span:not(:first-child) {
   color: #7b7b7b;
+}
+.page-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+.page {
+  cursor: pointer;
+}
+.page:not(:first-child) {
+  margin-left: 5px;
 }
 
 /* OFFER PAGE */
