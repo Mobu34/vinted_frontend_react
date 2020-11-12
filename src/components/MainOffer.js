@@ -20,6 +20,7 @@ const MainOffer = ({ offer }) => {
                 {offer.product_details.map((item, index) => {
                   return (
                     <OfferDetail
+                      key={index}
                       detailKey={Object.keys(item)}
                       detailValue={item[Object.keys(item)]}
                     />

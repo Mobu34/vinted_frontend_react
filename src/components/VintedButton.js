@@ -5,6 +5,7 @@ const VintedButton = ({ className, text, setModalLogin, setToken, type }) => {
   const handleClick = () => {
     if (setModalLogin) {
       setModalLogin(true);
+      document.body.classList.add("modal-open");
     } else if (setToken) {
       Cookie.remove("tokenCookie");
       setToken("");

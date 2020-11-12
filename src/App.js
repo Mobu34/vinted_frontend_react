@@ -10,8 +10,8 @@ import Home from "./containers/Home";
 import Modal from "./components/Modal";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-library.add(faSearch);
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
+library.add(faSearch, faTimes);
 
 const App = () => {
   const cookie = Cookie.get("tokenCookie");

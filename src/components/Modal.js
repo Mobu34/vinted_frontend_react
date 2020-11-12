@@ -7,6 +7,8 @@ import InputForm from "./InputForm";
 import VintedButton from "./VintedButton";
 import RedirectForm from "./RedirectForm";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Modal = ({ setModalLogin, connect }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -25,17 +27,26 @@ const Modal = ({ setModalLogin, connect }) => {
       if (response.status === 200) {
         connect(response.data);
         setModalLogin(false);
+        document.body.classList.remove("modal-open");
       }
     } catch (error) {
       alert("Incorrect");
     }
+  };
 
-    // console.log(response.status);
+  const handleClick = () => {
+    setModalLogin(false);
+    document.body.classList.remove("modal-open");
   };
 
   return (
     <div className="modal">
       <form className="login-form" onSubmit={handleSubmit}>
+        <FontAwesomeIcon
+          icon="times"
+          className="close-modal"
+          onClick={handleClick}
+        />
         <TitleForm title="Se connecter" />
         <InputForm
           type="text"
