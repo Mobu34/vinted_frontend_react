@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import MainHome from "../components/MainHome";
 
@@ -9,16 +10,27 @@ const Home = ({ search }) => {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState([]);
 
+  const { p } = useParams();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://vinted-react.herokuapp.com/offers?page=${page}&title=${search}`
-        );
+        let response;
+        if (!p) {
+          response = await axios.get(
+            `https://vinted-react.herokuapp.com/offers?page=1&title=${search}`
+          );
+        } else {
+          const slicedP = p.slice(p.length - 1);
+          response = await axios.get(
+            `https://vinted-react.herokuapp.com/offers?page=${slicedP}&title=${search}`
+          );
+        }
+
         setOffers(response.data);
         let i = 1;
         let j = 1;
-        const newPages = [...pages];
+        const newPages = [];
         while (i <= response.data.count) {
           newPages.push(j);
           i = i + 5;
@@ -32,7 +44,7 @@ const Home = ({ search }) => {
     };
 
     fetchData();
-  }, [setOffers, setIsLoading, page, search]);
+  }, [setOffers, setIsLoading, p, search]);
 
   return (
     <div className="home-page">

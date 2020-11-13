@@ -4,7 +4,7 @@ const Page = ({ item, setPages, page, setPage, dash, space }) => {
   const handleClick = () => {
     if (page !== item) {
       setPage(item);
-      setPages([]);
+      // setPages([]);
     }
   };
   return (

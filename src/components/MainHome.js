@@ -45,9 +45,8 @@ const MainHome = ({ isLoading, offers, pages, setPages, page, setPage }) => {
           {pages.map((item, index) => {
             console.log(item);
             return (
-              <Link to={`page${item}`} key={index} className="link">
+              <Link to={`/home/page${item}`} key={index} className="link">
                 <Page
-                  key={index}
                   item={item}
                   setPages={setPages}
                   page={page}

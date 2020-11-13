@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Cookie from "js-cookie";
 
 import Header from "./components/Header";
@@ -36,14 +36,17 @@ const App = () => {
         setToken={setToken}
       />
       <Switch>
+        <Route exact path="/">
+          <Home search={search} />
+        </Route>
+        <Route path="/home/:p">
+          <Home search={search} />
+        </Route>
         <Route path="/offer/:id">
           <Offer />
         </Route>
         <Route path="/signup">
           <Signup connect={connect} />
-        </Route>
-        <Route path="/">
-          <Home search={search} />
         </Route>
       </Switch>
       {modalLogin && <Modal setModalLogin={setModalLogin} connect={connect} />}
