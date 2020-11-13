@@ -1,14 +1,8 @@
 import React from "react";
 
-const Page = ({ item, setPages, page, setPage, dash, space }) => {
-  const handleClick = () => {
-    if (page !== item) {
-      setPage(item);
-      // setPages([]);
-    }
-  };
+const Page = ({ item, dash }) => {
   return (
-    <span className="page" onClick={handleClick}>
+    <span className="page">
       {item} {dash}
     </span>
   );

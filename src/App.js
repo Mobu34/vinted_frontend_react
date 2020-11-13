@@ -39,7 +39,7 @@ const App = () => {
         <Route exact path="/">
           <Home search={search} />
         </Route>
-        <Route path="/home/:p">
+        <Route path="/home/:page">
           <Home search={search} />
         </Route>
         <Route path="/offer/:id">

@@ -7,23 +7,22 @@ import MainHome from "../components/MainHome";
 const Home = ({ search }) => {
   const [offers, setOffers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
   const [pages, setPages] = useState([]);
 
-  const { p } = useParams();
+  const { page } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let response;
-        if (!p) {
+        if (!page) {
           response = await axios.get(
             `https://vinted-react.herokuapp.com/offers?page=1&title=${search}`
           );
         } else {
-          const slicedP = p.slice(p.length - 1);
+          const slicedPage = page.slice(page.length - 1);
           response = await axios.get(
-            `https://vinted-react.herokuapp.com/offers?page=${slicedP}&title=${search}`
+            `https://vinted-react.herokuapp.com/offers?page=${slicedPage}&title=${search}`
           );
         }
 
@@ -44,18 +43,11 @@ const Home = ({ search }) => {
     };
 
     fetchData();
-  }, [setOffers, setIsLoading, p, search]);
+  }, [setOffers, setIsLoading, page, search]);
 
   return (
     <div className="home-page">
-      <MainHome
-        isLoading={isLoading}
-        offers={offers}
-        pages={pages}
-        setPages={setPages}
-        page={page}
-        setPage={setPage}
-      />
+      <MainHome isLoading={isLoading} offers={offers} pages={pages} />
     </div>
   );
 };
