@@ -5,7 +5,21 @@ import VintedButton from "./VintedButton";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Header = ({ setModalLogin, token, setToken }) => {
+const Header = ({
+  searchInput,
+  setSearchInput,
+  setSearch,
+  setModalLogin,
+  token,
+  setToken,
+}) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearch(searchInput);
+  };
+  const handleChange = (e) => {
+    setSearchInput(e.target.value);
+  };
   return (
     <header className="header-comp">
       <div className="wrapper">
@@ -13,13 +27,16 @@ const Header = ({ setModalLogin, token, setToken }) => {
           <div className="header-div1">
             <img src={VintedLogo} alt="vinted-logo" className="vinted-logo" />
             <div className="search-container">
-              <input
-                type="text"
-                name="site-search"
-                className="site-search"
-                placeholder="Recherche des articles"
-              />
-              <FontAwesomeIcon icon="search" className="search-icon" />
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="site-search"
+                  className="site-search"
+                  placeholder="Recherche des articles"
+                  onChange={handleChange}
+                />
+                <FontAwesomeIcon icon="search" className="search-icon" />
+              </form>
             </div>
           </div>
           <div className="header-div2">

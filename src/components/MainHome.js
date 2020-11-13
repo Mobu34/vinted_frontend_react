@@ -47,6 +47,7 @@ const MainHome = ({ isLoading, offers, pages, setPages, page, setPage }) => {
         </div>
         <div className="page-container">
           {pages.map((item, index) => {
+            console.log(item);
             return (
               <Page
                 key={index}

@@ -17,6 +17,8 @@ const App = () => {
   const cookie = Cookie.get("tokenCookie");
   const [token, setToken] = useState(cookie || "");
   const [modalLogin, setModalLogin] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [search, setSearch] = useState("");
 
   const connect = (tokenCookie) => {
     Cookie.set("tokenCookie", tokenCookie);
@@ -25,7 +27,14 @@ const App = () => {
 
   return (
     <Router>
-      <Header setModalLogin={setModalLogin} token={token} setToken={setToken} />
+      <Header
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        setSearch={setSearch}
+        setModalLogin={setModalLogin}
+        token={token}
+        setToken={setToken}
+      />
       <Switch>
         <Route path="/offer/:id">
           <Offer />
@@ -34,7 +43,7 @@ const App = () => {
           <Signup connect={connect} />
         </Route>
         <Route path="/">
-          <Home />
+          <Home search={search} />
         </Route>
       </Switch>
       {modalLogin && <Modal setModalLogin={setModalLogin} connect={connect} />}

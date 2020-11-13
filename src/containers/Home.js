@@ -3,7 +3,7 @@ import axios from "axios";
 
 import MainHome from "../components/MainHome";
 
-const Home = ({}) => {
+const Home = ({ search }) => {
   const [offers, setOffers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -13,7 +13,7 @@ const Home = ({}) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/offers?page=${page}`
+          `http://localhost:3001/offers?page=${page}&title=${search}`
         );
         setOffers(response.data);
         let i = 1;
@@ -32,9 +32,8 @@ const Home = ({}) => {
     };
 
     fetchData();
-  }, [setOffers, setIsLoading, page]);
+  }, [setOffers, setIsLoading, page, search]);
 
-  console.log(pages);
   return (
     <div className="home-page">
       <MainHome
