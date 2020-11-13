@@ -35,11 +35,7 @@ const MainHome = ({ isLoading, offers, pages, setPages, page, setPage }) => {
             ? "En cours de chargement ..."
             : offers.offers.map((offer, index) => {
                 return (
-                  <Link
-                    to={`/offer/${offer._id}`}
-                    key={index}
-                    style={{ textDecoration: "none" }}
-                  >
+                  <Link to={`/offer/${offer._id}`} key={index} className="link">
                     <OfferItem index={index} offer={offer} />
                   </Link>
                 );
@@ -49,14 +45,16 @@ const MainHome = ({ isLoading, offers, pages, setPages, page, setPage }) => {
           {pages.map((item, index) => {
             console.log(item);
             return (
-              <Page
-                key={index}
-                item={item}
-                setPages={setPages}
-                page={page}
-                setPage={setPage}
-                dash={pages.length - 1 !== index && "-"}
-              />
+              <Link to={`page${item}`} key={index} className="link">
+                <Page
+                  key={index}
+                  item={item}
+                  setPages={setPages}
+                  page={page}
+                  setPage={setPage}
+                  dash={pages.length - 1 !== index && "-"}
+                />
+              </Link>
             );
           })}
         </div>
