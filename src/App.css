@@ -187,6 +187,9 @@ h2 {
 .page:not(:first-child) {
   margin-left: 5px;
 }
+.selected-page {
+  background-color: #2db1bb;
+}
 
 /* OFFER PAGE */
 .main-offer-comp {

@@ -7,7 +7,7 @@ import Page from "./Page";
 
 import tear from "../assets/img/tear.svg";
 
-const MainHome = ({ isLoading, offers, pages }) => {
+const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
   return (
     <main className="main-home-comp">
       <img
@@ -43,10 +43,13 @@ const MainHome = ({ isLoading, offers, pages }) => {
         </div>
         <div className="page-container">
           {pages.map((item, index) => {
-            console.log(item);
             return (
               <Link to={`/home/page${item}`} key={index} className="link">
-                <Page item={item} dash={pages.length - 1 !== index && "-"} />
+                <Page
+                  item={item}
+                  dash={pages.length - 1 !== index && "-"}
+                  slicedPage={slicedPage}
+                />
               </Link>
             );
           })}

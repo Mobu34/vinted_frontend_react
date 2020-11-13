@@ -10,6 +10,10 @@ const Home = ({ search }) => {
   const [pages, setPages] = useState([]);
 
   const { page } = useParams();
+  let slicedPage;
+  if (page) {
+    slicedPage = page.slice(page.length - 1);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +24,6 @@ const Home = ({ search }) => {
             `https://vinted-react.herokuapp.com/offers?page=1&title=${search}`
           );
         } else {
-          const slicedPage = page.slice(page.length - 1);
           response = await axios.get(
             `https://vinted-react.herokuapp.com/offers?page=${slicedPage}&title=${search}`
           );
@@ -47,7 +50,12 @@ const Home = ({ search }) => {
 
   return (
     <div className="home-page">
-      <MainHome isLoading={isLoading} offers={offers} pages={pages} />
+      <MainHome
+        isLoading={isLoading}
+        offers={offers}
+        pages={pages}
+        slicedPage={slicedPage}
+      />
     </div>
   );
 };
