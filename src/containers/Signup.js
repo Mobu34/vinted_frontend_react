@@ -17,15 +17,12 @@ const Signup = ({ connect }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://vinted-react.herokuapp.com/user/signup",
-        {
-          username,
-          email,
-          phone,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:3001/user/signup", {
+        username,
+        email,
+        phone,
+        password,
+      });
 
       if (response.status === 200) {
         connect(response.data.token);

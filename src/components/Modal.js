@@ -19,13 +19,10 @@ const Modal = ({ setModalLogin, connect }) => {
     let loginType = regex.test(login) ? "email" : "username";
 
     try {
-      const response = await axios.post(
-        "https://vinted-react.herokuapp.com/user/login",
-        {
-          [loginType]: login,
-          password: password,
-        }
-      );
+      const response = await axios.post("http://localhost:3001/user/login", {
+        [loginType]: login,
+        password: password,
+      });
 
       if (response.status === 200) {
         connect(response.data);

@@ -13,7 +13,7 @@ const Home = ({}) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://vinted-react.herokuapp.com/offers?page=${page}`
+          `http://localhost:3001/offers?page=${page}`
         );
         setOffers(response.data);
         let i = 1;

@@ -27,8 +27,8 @@ const MainHome = ({ isLoading, offers, pages, setPages, page, setPage }) => {
               text="Commencer à vendre"
             />
           </div>
-          <img src={tear} alt="" className="tear-img" />
         </div>
+        <img src={tear} alt="" className="tear-img" />
         {/* MainHome Offers */}
         <div className="offer-list">
           {isLoading
