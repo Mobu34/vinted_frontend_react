@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import VintedButton from "./VintedButton";
+import PriceFilter from "./PriceFilter";
 import Sort from "./Sort";
 import OfferItem from "./OfferItem";
 import Page from "./Page";
@@ -11,6 +12,9 @@ import tear from "../assets/img/tear.svg";
 
 const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
   const [openFilters, setOpenFilters] = useState(false);
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState(10000);
+  const [openSortBy, setOpenSortBy] = useState(false);
   const [keepPage, setKeepPage] = useState(1);
   const [keepSort, setKeepSort] = useState("");
 
@@ -40,30 +44,74 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
           <div className="result">
             {offers.count ? offers.count : "..."} résultats
           </div>
+          <div className="filters">
+            <div
+              className="price-filter"
+              onClick={() => setOpenFilters(!openFilters)}
+            >
+              Prix <FontAwesomeIcon icon="sort-down" />
+            </div>
+            <div className="price">
+              {openFilters && (
+                <>
+                  {/* <form className="price-form"> */}
+                  <PriceFilter
+                    name="priceMin"
+                    label="De"
+                    price={priceMin}
+                    setPrice={setPriceMin}
+                  />
+                  <PriceFilter
+                    name="priceMax"
+                    label="À"
+                    price={priceMax}
+                    setPrice={setPriceMax}
+                  />
+                  <Link
+                    to={`/home/page_1/${
+                      !keepSort ? "recents" : `order_${keepSort}`
+                    }/priceMin_${priceMin}/priceMax_${priceMax}`}
+                    onClick={() => setOpenFilters(!openFilters)}
+                  >
+                    <VintedButton
+                      className="price-submit"
+                      text="OK"
+                      type="submit"
+                    />
+                  </Link>
+                  {/* </form> */}
+                </>
+              )}
+            </div>
+          </div>
           <div className="sort-container">
             <span
               className="sort-by"
-              onClick={() => setOpenFilters(!openFilters)}
+              onClick={() => setOpenSortBy(!openSortBy)}
             >
               Trier par
             </span>
             <FontAwesomeIcon icon="sort-down" />
             <div className="sort">
-              {openFilters && (
+              {openSortBy && (
                 <>
                   <Sort
                     text="Croissant"
                     value="asc"
-                    setOpenFilters={setOpenFilters}
+                    setOpenSortBy={setOpenSortBy}
                     setKeepSort={setKeepSort}
                     keepPage={keepPage}
+                    priceMin={priceMin}
+                    priceMax={priceMax}
                   />
                   <Sort
                     text="Décroissant"
                     value="desc"
-                    setOpenFilters={setOpenFilters}
+                    setOpenSortBy={setOpenSortBy}
                     setKeepSort={setKeepSort}
                     keepPage={keepPage}
+                    priceMin={priceMin}
+                    priceMax={priceMax}
                   />
                 </>
               )}
@@ -87,7 +135,7 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
               <Link
                 to={`/home/page_${item}/${
                   !keepSort ? "recents" : `order_${keepSort}`
-                }`}
+                }/priceMin_${priceMin}/priceMax_${priceMax}`}
                 key={index}
                 className="link"
                 onClick={() => setKeepPage(item)}

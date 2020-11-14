@@ -9,10 +9,11 @@ const Home = ({ search }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pages, setPages] = useState([]);
 
-  const { page, order } = useParams();
-  let regex;
+  const { page, order, min, max } = useParams();
   let slicedPage;
   let sortBy;
+  let priceMin;
+  let priceMax;
   if (page) {
     const split = page.split("_");
     slicedPage = split[1];
@@ -20,6 +21,14 @@ const Home = ({ search }) => {
   if (order) {
     const split = order.split("_");
     sortBy = split[1];
+  }
+  if (min) {
+    const split = min.split("_");
+    priceMin = split[1];
+  }
+  if (max) {
+    const split = max.split("_");
+    priceMax = split[1];
   }
 
   useEffect(() => {
@@ -34,7 +43,7 @@ const Home = ({ search }) => {
           response = await axios.get(
             `https://vinted-react.herokuapp.com/offers?page=${slicedPage}&title=${search}&sort=${
               sortBy || ""
-            }`
+            }&priceMin=${priceMin || "0"}&priceMax=${priceMax || 10000}`
           );
         }
 
@@ -55,7 +64,7 @@ const Home = ({ search }) => {
     };
 
     fetchData();
-  }, [setOffers, setIsLoading, page, order, search]);
+  }, [setOffers, setIsLoading, page, order, min, max, search]);
 
   return (
     <div className="home-page">
