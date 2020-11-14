@@ -142,13 +142,43 @@ h2 {
 }
 
 /* MainHome Offers*/
-
+.filter-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  color: #7b7b7b;
+}
+.sort-container {
+  position: relative;
+}
+.sort-by {
+  cursor: pointer;
+  margin-right: 10px;
+}
+.sort {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: #fff;
+  right: 0;
+  margin-top: 10px;
+  width: 150px;
+}
+.sort-comp {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.sort-comp:first-child {
+  border-bottom: 1px black solid;
+}
 .offer-list {
   width: 100%;
   display: flex;
-  margin-top: 40px;
+  margin-top: 20px;
   flex-wrap: wrap;
   color: black;
+  /* background-color: blueviolet; */
 }
 .offer-item {
   margin: 0 10px;
@@ -183,12 +213,17 @@ h2 {
 }
 .page {
   cursor: pointer;
+  border: 1px solid #7a7a7a;
+  padding: 0 3px 0 3px;
+  margin: 0 1px 0 1px;
 }
-.page:not(:first-child) {
-  margin-left: 5px;
-}
+
 .selected-page {
   background-color: #2db1bb;
+  color: #fff;
+  padding: 0 3px 0 3px;
+  border: 1px solid #7a7a7a;
+  margin: 0 1px 0 1px;
 }
 
 /* OFFER PAGE */

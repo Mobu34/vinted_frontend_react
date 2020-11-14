@@ -10,8 +10,12 @@ import Home from "./containers/Home";
 import Modal from "./components/Modal";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
-library.add(faSearch, faTimes);
+import {
+  faSearch,
+  faTimes,
+  faSortDown,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faSearch, faTimes, faSortDown);
 
 const App = () => {
   const cookie = Cookie.get("tokenCookie");
@@ -39,7 +43,7 @@ const App = () => {
         <Route exact path="/">
           <Home search={search} />
         </Route>
-        <Route path="/home/:page">
+        <Route path="/home/:page/:order">
           <Home search={search} />
         </Route>
         <Route path="/offer/:id">

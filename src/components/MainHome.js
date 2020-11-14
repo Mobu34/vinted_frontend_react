@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import VintedButton from "./VintedButton";
+import Sort from "./Sort";
 import OfferItem from "./OfferItem";
 import Page from "./Page";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import tear from "../assets/img/tear.svg";
 
 const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
+  const [openFilters, setOpenFilters] = useState(false);
+  const [keepPage, setKeepPage] = useState(1);
+  const [keepSort, setKeepSort] = useState("");
+
   return (
     <main className="main-home-comp">
       <img
@@ -30,6 +36,40 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
         </div>
         <img src={tear} alt="" className="tear-img" />
         {/* MainHome Offers */}
+        <div className="filter-container">
+          <div className="result">
+            {offers.count ? offers.count : "..."} résultats
+          </div>
+          <div className="sort-container">
+            <span
+              className="sort-by"
+              onClick={() => setOpenFilters(!openFilters)}
+            >
+              Trier par
+            </span>
+            <FontAwesomeIcon icon="sort-down" />
+            <div className="sort">
+              {openFilters && (
+                <>
+                  <Sort
+                    text="Croissant"
+                    value="asc"
+                    setOpenFilters={setOpenFilters}
+                    setKeepSort={setKeepSort}
+                    keepPage={keepPage}
+                  />
+                  <Sort
+                    text="Décroissant"
+                    value="desc"
+                    setOpenFilters={setOpenFilters}
+                    setKeepSort={setKeepSort}
+                    keepPage={keepPage}
+                  />
+                </>
+              )}
+            </div>
+          </div>
+        </div>
         <div className="offer-list">
           {isLoading
             ? "En cours de chargement ..."
@@ -44,7 +84,14 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
         <div className="page-container">
           {pages.map((item, index) => {
             return (
-              <Link to={`/home/page${item}`} key={index} className="link">
+              <Link
+                to={`/home/page_${item}/${
+                  !keepSort ? "recents" : `order_${keepSort}`
+                }`}
+                key={index}
+                className="link"
+                onClick={() => setKeepPage(item)}
+              >
                 <Page
                   item={item}
                   dash={pages.length - 1 !== index && "-"}

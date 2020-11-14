@@ -9,23 +9,32 @@ const Home = ({ search }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pages, setPages] = useState([]);
 
-  const { page } = useParams();
+  const { page, order } = useParams();
+  let regex;
   let slicedPage;
+  let sortBy;
   if (page) {
-    slicedPage = page.slice(page.length - 1);
+    const split = page.split("_");
+    slicedPage = split[1];
+  }
+  if (order) {
+    const split = order.split("_");
+    sortBy = split[1];
   }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let response;
-        if (!page) {
+        if (!page && !order) {
           response = await axios.get(
             `https://vinted-react.herokuapp.com/offers?page=1&title=${search}`
           );
         } else {
           response = await axios.get(
-            `https://vinted-react.herokuapp.com/offers?page=${slicedPage}&title=${search}`
+            `https://vinted-react.herokuapp.com/offers?page=${slicedPage}&title=${search}&sort=${
+              sortBy || ""
+            }`
           );
         }
 
@@ -46,7 +55,7 @@ const Home = ({ search }) => {
     };
 
     fetchData();
-  }, [setOffers, setIsLoading, page, search]);
+  }, [setOffers, setIsLoading, page, order, search]);
 
   return (
     <div className="home-page">

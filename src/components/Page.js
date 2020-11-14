@@ -1,14 +1,10 @@
 import React from "react";
 
 const Page = ({ item, dash, slicedPage }) => {
-  if (slicedPage == item) {
-    console.log("yes", slicedPage);
-  }
+  const pageNb = Number(slicedPage);
 
   return (
-    <span className={slicedPage == item ? "selected-page" : "page"}>
-      {item} {dash}
-    </span>
+    <span className={pageNb === item ? "selected-page" : "page"}>{item}</span>
   );
 };
 
