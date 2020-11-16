@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Cookie from "js-cookie";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useDropzone } from "react-dropzone";
 
 import PublishInput from "../components/PublishInput";
 
 const Publish = () => {
+  const [picture, setPicture] = useState();
   const [file, setFile] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -15,10 +17,20 @@ const Publish = () => {
   const [condition, setCondition] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState(0);
+  const [isDragActive, setIsDragActive] = useState(false);
 
   const token = Cookie.get("tokenCookie");
 
   const history = useHistory();
+
+  const onDrop = useCallback(async (acceptedFiles) => {
+    console.log(acceptedFiles);
+    const objURL = URL.createObjectURL(acceptedFiles[0]);
+    setPicture(objURL);
+    setIsDragActive(!isDragActive);
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   const formData = new FormData();
   formData.append("photo", file);
@@ -48,15 +60,16 @@ const Publish = () => {
         );
         history.push(`/offer/${response.data._id}`);
       }
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleChange = (e) => {
-    setFile(e.target.files[0]);
-  };
+  // const handleChange = (e) => {
+  //   console.log(e.target.files);
+  //   setFile(e.target.files[0]);
+  // };
+  // console.log(file);
 
   return (
     <div className="Publish">
@@ -65,18 +78,39 @@ const Publish = () => {
         <form onSubmit={handleSubmit} className="Publish-form">
           <div className="Publish-file-container">
             <div className="Publish-file-subcontainer">
-              <div className="test">
+              {/* <div className="test">
                 <label htmlFor="photo" className="Publish-file-label">
                   Ajoute une photo
                 </label>
                 <input
+                  multiple={true}
                   name="photo"
                   type="file"
                   onChange={handleChange}
                   className="Publish-file"
-                  onMouseUp={() => console.log("UP")}
+                  onMouseUp={(e) => console.log("UP")}
                 />
-              </div>
+              </div> */}
+              {isDragActive ? (
+                <div className="Publish-img-container">
+                  <img
+                    src={picture}
+                    alt={picture.name}
+                    className="Publish-img"
+                  />
+                  <span
+                    className="Publish-img-delete"
+                    onClick={() => setIsDragActive(!isDragActive)}
+                  >
+                    X
+                  </span>
+                </div>
+              ) : (
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <p className="Publish-file-label">Ajoute une photo</p>
+                </div>
+              )}
             </div>
           </div>
           <div className="Publish-title_desc-container">

@@ -414,6 +414,21 @@ h2 {
   justify-content: center;
   align-items: center;
 }
+.Publish-img-container {
+  height: 100%;
+  position: relative;
+}
+.Publish-img {
+  height: 100%;
+}
+.Publish-img-delete {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: #fff;
+  padding: 5px;
+  cursor: pointer;
+}
 .test {
   position: relative;
   display: flex;

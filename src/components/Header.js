@@ -14,7 +14,6 @@ const Header = ({
   token,
   setToken,
 }) => {
-  console.log(setModalLogin);
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearch(searchInput);
