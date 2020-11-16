@@ -369,6 +369,121 @@ h2 {
   align-items: center;
 }
 
+/* Publish */
+.Publish {
+  margin-top: 50px;
+}
+.Publish-title {
+  font-size: 25px;
+  font-weight: 400;
+}
+.Publish-form > div {
+  margin-top: 20px;
+}
+.Publish-form > div .PublishInput:not(:last-child) {
+  border-bottom: solid 1px #bcbcbc;
+}
+.PublishInput {
+  display: flex;
+  padding: 30px 0;
+}
+.PublishInput label,
+.PublishInput input,
+.PublishInput textarea,
+.PublishInput-price {
+  flex: 1;
+}
+.PublishInput-input,
+.PublishInput-textarea {
+  border: none;
+  border-bottom: solid 1px #bcbcbc;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.Publish-file-container {
+  background-color: #fff;
+  height: 200px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.Publish-file-subcontainer {
+  border: dashed 1px #bcbcbc;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.test {
+  position: relative;
+  display: flex;
+  border-radius: 5px;
+  width: 180px;
+  height: 40px;
+}
+.Publish-file-label {
+  border: 1px solid #2db1bb;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: 100%;
+  border-radius: 5px;
+  color: #2db1bb;
+  cursor: pointer;
+}
+.Publish-file {
+  border-radius: 5px;
+  opacity: 0;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+.Publish-title_desc-container {
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.Publish-details-container {
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.Publish-price-container {
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.PublishInput-price {
+  display: flex;
+  flex-direction: column;
+}
+.PublishInput-price > input {
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: solid 1px #bcbcbc;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.Publish-submit {
+  display: flex;
+  justify-content: flex-end;
+}
+.Publish-submit button {
+  background-color: #2db1bb;
+  border: none;
+  color: #fff;
+  height: 40px;
+  width: 100px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
 /* MODAL */
 .modal-open {
   overflow: hidden;

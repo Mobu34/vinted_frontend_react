@@ -64,7 +64,20 @@ const Publish = () => {
         <h1 className="Publish-title">Vends ton article</h1>
         <form onSubmit={handleSubmit} className="Publish-form">
           <div className="Publish-file-container">
-            <input type="file" onChange={handleChange} />
+            <div className="Publish-file-subcontainer">
+              <div className="test">
+                <label htmlFor="photo" className="Publish-file-label">
+                  Ajoute une photo
+                </label>
+                <input
+                  name="photo"
+                  type="file"
+                  onChange={handleChange}
+                  className="Publish-file"
+                  onMouseUp={() => console.log("UP")}
+                />
+              </div>
+            </div>
           </div>
           <div className="Publish-title_desc-container">
             <PublishInput
@@ -128,7 +141,7 @@ const Publish = () => {
               setState={setPrice}
             />
           </div>
-          <div>
+          <div className="Publish-submit">
             <button type="submit"> Ajouter</button>
           </div>
         </form>

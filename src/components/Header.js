@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import VintedLogo from "../assets/img/VintedLogo.png";
 import VintedButton from "./VintedButton";
@@ -26,7 +27,9 @@ const Header = ({
       <div className="wrapper">
         <div className="header-container">
           <div className="header-div1">
-            <img src={VintedLogo} alt="vinted-logo" className="vinted-logo" />
+            <Link to="/">
+              <img src={VintedLogo} alt="vinted-logo" className="vinted-logo" />
+            </Link>
             <div className="search-container">
               <form onSubmit={handleSubmit}>
                 <input
