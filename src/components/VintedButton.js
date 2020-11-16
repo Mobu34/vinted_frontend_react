@@ -1,14 +1,25 @@
 import React from "react";
 import Cookie from "js-cookie";
+import { Link } from "react-router-dom";
 
-const VintedButton = ({ className, text, setModalLogin, setToken, type }) => {
+const VintedButton = ({
+  className,
+  text,
+  setModalLogin,
+  setToken,
+  type,
+  token,
+}) => {
   const handleClick = () => {
-    if (setModalLogin) {
+    if (setModalLogin && !token) {
       setModalLogin(true);
       document.body.classList.add("modal-open");
     } else if (setToken) {
       Cookie.remove("tokenCookie");
       setToken("");
+    } else if (!token && !type) {
+      setModalLogin(true);
+      document.body.classList.add("modal-open");
     }
   };
   return (
@@ -17,7 +28,13 @@ const VintedButton = ({ className, text, setModalLogin, setToken, type }) => {
       onClick={handleClick}
       type={type ? type : null}
     >
-      {text}
+      {token ? (
+        <Link to="/publish" className="link">
+          {text}
+        </Link>
+      ) : (
+        text
+      )}
     </button>
   );
 };

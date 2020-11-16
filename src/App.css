@@ -162,6 +162,9 @@ h2 {
   box-shadow: 0 8px 24px rgba(17, 17, 17, 0.24);
   color: #000;
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .price-form {
   display: flex;

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const PriceFilter = ({ name, label, price, setPrice }) => {
   const handleChange = (e) => {
@@ -15,6 +14,7 @@ const PriceFilter = ({ name, label, price, setPrice }) => {
         type="text"
         name={name}
         onChange={handleChange}
+        value={price}
       />
     </div>
   );

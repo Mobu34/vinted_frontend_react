@@ -13,6 +13,8 @@ const Modal = ({ setModalLogin, connect }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  console.log(setModalLogin);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const regex = new RegExp("@", "i");

@@ -13,6 +13,7 @@ const Header = ({
   token,
   setToken,
 }) => {
+  console.log(setModalLogin);
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearch(searchInput);
@@ -57,7 +58,12 @@ const Header = ({
               </>
             )}
 
-            <VintedButton className="sell-button" text="Vends tes articles" />
+            <VintedButton
+              className="sell-button"
+              text="Vends tes articles"
+              token={token}
+              setModalLogin={setModalLogin}
+            />
           </div>
         </div>
       </div>

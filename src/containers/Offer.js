@@ -4,7 +4,7 @@ import axios from "axios";
 
 import MainOffer from "../components/MainOffer";
 
-const Offer = ({}) => {
+const Offer = () => {
   const [offer, setOffer] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();

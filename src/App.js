@@ -1,12 +1,13 @@
 import "./App.css";
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Cookie from "js-cookie";
 
 import Header from "./components/Header";
 import Offer from "./containers/Offer";
 import Signup from "./containers/Signup";
 import Home from "./containers/Home";
+import Publish from "./containers/Publish";
 import Modal from "./components/Modal";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -51,6 +52,9 @@ const App = () => {
         </Route>
         <Route path="/signup">
           <Signup connect={connect} />
+        </Route>
+        <Route path="/publish">
+          <Publish />
         </Route>
       </Switch>
       {modalLogin && <Modal setModalLogin={setModalLogin} connect={connect} />}

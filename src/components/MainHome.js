@@ -54,7 +54,6 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
             <div className="price">
               {openFilters && (
                 <>
-                  {/* <form className="price-form"> */}
                   <PriceFilter
                     name="priceMin"
                     label="De"
@@ -79,7 +78,6 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
                       type="submit"
                     />
                   </Link>
-                  {/* </form> */}
                 </>
               )}
             </div>
