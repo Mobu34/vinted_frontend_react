@@ -4,7 +4,6 @@ import axios from "axios";
 
 import TitleForm from "../components/TitleForm";
 import InputForm from "../components/InputForm";
-import VintedButton from "../components/VintedButton";
 
 const Signup = ({ connect }) => {
   const [username, setUsername] = useState("");
@@ -16,22 +15,26 @@ const Signup = ({ connect }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "https://vinted-react.herokuapp.com/user/signup",
-        {
-          username,
-          email,
-          phone,
-          password,
-        }
-      );
+    if (password && confirmPassword) {
+      try {
+        const response = await axios.post(
+          "https://vinted-react.herokuapp.com/user/signup",
+          {
+            username,
+            email,
+            phone,
+            password,
+          }
+        );
 
-      if (response.status === 200) {
-        connect(response.data.token);
-        history.push("/");
-      }
-    } catch (error) {}
+        if (response.status === 200) {
+          connect(response.data.token);
+          history.push("/");
+        }
+      } catch (error) {}
+    } else {
+      alert("Les mots de passe ne sont pas identiques");
+    }
   };
 
   return (
@@ -65,11 +68,9 @@ const Signup = ({ connect }) => {
               placeholder="Confirmer mot de passe"
               setState={setConfirmPassword}
             />
-            <VintedButton
-              className="signup-button"
-              text="S'inscrire"
-              type="submit"
-            />
+            <button className="signup-button" type="submit">
+              S'inscrire
+            </button>
           </form>
         </div>
       </div>

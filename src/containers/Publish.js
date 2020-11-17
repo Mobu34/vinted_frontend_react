@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Cookie from "js-cookie";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 
 import PublishInput from "../components/PublishInput";
@@ -66,37 +66,19 @@ const Publish = () => {
     }
   };
 
-  // const handleChange = (e) => {
-  //   console.log(e.target.files);
-  //   setFile(e.target.files[0]);
-  // };
-
   const handleClick = () => {
     setPicture("");
     setFile({});
     setIsDragActive(!isDragActive);
   };
 
-  return (
+  return token ? (
     <div className="Publish">
       <div className="wrapper">
         <h1 className="Publish-title">Vends ton article</h1>
         <form onSubmit={handleSubmit} className="Publish-form">
           <div className="Publish-file-container">
             <div className="Publish-file-subcontainer">
-              {/* <div className="test">
-                <label htmlFor="photo" className="Publish-file-label">
-                  Ajoute une photo
-                </label>
-                <input
-                  multiple={true}
-                  name="photo"
-                  type="file"
-                  onChange={handleChange}
-                  className="Publish-file"
-                  onMouseUp={(e) => console.log("UP")}
-                />
-              </div> */}
               {isDragActive ? (
                 <div className="Publish-img-container">
                   <img
@@ -184,6 +166,8 @@ const Publish = () => {
         </form>
       </div>
     </div>
+  ) : (
+    <Redirect to="/" />
   );
 };
 

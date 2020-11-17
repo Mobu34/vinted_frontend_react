@@ -64,7 +64,17 @@ const Home = ({ search }) => {
     };
 
     fetchData();
-  }, [setOffers, setIsLoading, page, order, min, max, search]);
+  }, [
+    setOffers,
+    setIsLoading,
+    order,
+    page,
+    priceMax,
+    priceMin,
+    slicedPage,
+    sortBy,
+    search,
+  ]);
 
   return (
     <div className="home-page">

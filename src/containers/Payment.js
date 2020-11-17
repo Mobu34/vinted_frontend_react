@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookie from "js-cookie";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
@@ -10,6 +10,7 @@ import CheckoutForm from "../components/CheckoutForm";
 const Payment = () => {
   const { id } = useParams();
   const token = Cookie.get("tokenCookie");
+  const history = useHistory();
 
   const [isLoading, setIsLoading] = useState(true);
   const [offer, setOffer] = useState({});
@@ -38,6 +39,11 @@ const Payment = () => {
     "pk_test_51HoU8gDO3WpCsWUtsLvEkvYJkUxZd0b0CHcC68eWmEc4HW3f1QrJiAAOdIqdqtx56G9S25Kkia91YrDxu3kp4jqP00ZWoGGIEX"
   );
 
+  const redirectionHomepage = () => {
+    setTimeout(() => {
+      history.push("/");
+    }, 5000);
+  };
   const handleChange = (e) => {
     setFullName(e.target.value);
   };
@@ -48,7 +54,10 @@ const Payment = () => {
         {isLoading ? (
           "Chargement en cours"
         ) : completed ? (
-          <span>Paiement effectué</span>
+          <span onClick={redirectionHomepage()}>
+            Paiement effectué, vous allez être redirigé vers la page
+            d'accueil...
+          </span>
         ) : (
           <>
             <div className="Payment-summary_details-container">
@@ -79,15 +88,27 @@ const Payment = () => {
                 (frais de protection et frais de port inclus).
               </p>
             </div>
-            <Elements stripe={stripePromise}>
-              <label htmlFor="name">Nom du détenteur de la carte</label>
-              <input type="text" id="name" onChange={handleChange} />
-              <CheckoutForm
-                setCompleted={setCompleted}
-                offer={offer}
-                fullName={fullName}
-              />
-            </Elements>
+            <div className="Payment-cardholder-container">
+              <div className="Payment-cardholder-label_input-container">
+                <label htmlFor="name" className="Payment-cardholder-label">
+                  Nom du détenteur de la carte
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  className="Payment-cardholder-input"
+                  onChange={handleChange}
+                  placeholder="ex: Jean Dupont"
+                />
+              </div>
+              <Elements stripe={stripePromise}>
+                <CheckoutForm
+                  setCompleted={setCompleted}
+                  offer={offer}
+                  fullName={fullName}
+                />
+              </Elements>
+            </div>
           </>
         )}
       </div>

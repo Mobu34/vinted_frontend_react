@@ -1,9 +1,22 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+import Cookie from "js-cookie";
 
-import VintedButton from "./VintedButton";
 import OfferDetail from "./OfferDetail";
 
 const MainOffer = ({ offer, setModalLogin }) => {
+  const token = Cookie.get("tokenCookie");
+  const history = useHistory();
+
+  const handleClick = () => {
+    if (token) {
+      history.push(`/payment/${offer._id}`);
+    } else {
+      setModalLogin(true);
+      document.body.classList.add("modal-open");
+    }
+  };
+
   return (
     <div className="main-offer-comp">
       <div className="wrapper">
@@ -33,12 +46,9 @@ const MainOffer = ({ offer, setModalLogin }) => {
               <p>{offer.product_description}</p>
               <span>{offer.owner.account.username}</span>
             </div>
-            <VintedButton
-              className="buy-button"
-              text="Acheter"
-              id={offer._id}
-              setModalLogin={setModalLogin}
-            />
+            <button className="buy-button" onClick={handleClick}>
+              Acheter
+            </button>
           </div>
         </div>
       </div>

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import TitleForm from "./TitleForm";
 import InputForm from "./InputForm";
-import VintedButton from "./VintedButton";
 import RedirectForm from "./RedirectForm";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +13,8 @@ const Modal = ({ setModalLogin, connect }) => {
   const [password, setPassword] = useState("");
 
   const history = useHistory();
+  const location = useLocation();
+  const splittedLocation = location.pathname.split("/");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,20 +31,35 @@ const Modal = ({ setModalLogin, connect }) => {
       );
 
       if (response.status === 200) {
+        console.log(location);
         connect(response.data);
         setModalLogin(false);
         document.body.classList.remove("modal-open");
+        if (splittedLocation[1] === "offer") {
+          history.push(`/payment/${splittedLocation[2]}`);
+        } else {
+          history.push("/");
+        }
       }
     } catch (error) {
       alert("Incorrect");
     }
   };
 
-  const handleClick = () => {
+  const handleCloseClick = () => {
     setModalLogin(false);
     document.body.classList.remove("modal-open");
-    console.log("handleClick");
-    history.push("/payment/test");
+  };
+
+  const handleClick = () => {
+    // console.log(location);
+    // if (splittedLocation[1] === "offer") {
+    //   console.log(`/payment/${splittedLocation[2]}`);
+    //   history.push(location.pathname);
+    // } else {
+    //   console.log("publish");
+    //   history.push("/publish");
+    // }
   };
 
   return (
@@ -52,7 +68,7 @@ const Modal = ({ setModalLogin, connect }) => {
         <FontAwesomeIcon
           icon="times"
           className="close-modal"
-          onClick={handleClick}
+          onClick={handleCloseClick}
         />
         <TitleForm title="Se connecter" />
         <InputForm
@@ -65,11 +81,24 @@ const Modal = ({ setModalLogin, connect }) => {
           placeholder="Mot de passe"
           setState={setPassword}
         />
-        <VintedButton
-          text="Se connecter"
-          className="login-button"
+        <button
           type="submit"
-        />
+          className="login-button"
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {/* <Link
+            to="/payment/ezfzfzfzefz"
+            // to={
+            //   splittedLocation[1] === "offer"
+            //     ? `/payment/${splittedLocation[2]}`
+            //     : "/publish"
+            // }
+          > */}
+          Se connecter
+          {/* </Link> */}
+        </button>
         <Link to="/signup" className="link">
           <RedirectForm
             text="Pas encore de compte ? Inscris-toi !"

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import VintedButton from "./VintedButton";
 import PriceFilter from "./PriceFilter";
 import Sort from "./Sort";
 import OfferItem from "./OfferItem";
@@ -32,10 +31,7 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
             <h2 className="start-sell-title">
               Prêts à faire du tri dans vos placards ?
             </h2>
-            <VintedButton
-              className="start-sell-button"
-              text="Commencer à vendre"
-            />
+            <button className="start-sell-button">Commencer à vendre</button>
           </div>
         </div>
         <img src={tear} alt="" className="tear-img" />
@@ -72,11 +68,9 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
                     }/priceMin_${priceMin}/priceMax_${priceMax}`}
                     onClick={() => setOpenFilters(!openFilters)}
                   >
-                    <VintedButton
-                      className="price-submit"
-                      text="OK"
-                      type="submit"
-                    />
+                    <button className="price-submit" type="submit">
+                      OK
+                    </button>
                   </Link>
                 </>
               )}

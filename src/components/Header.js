@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Cookie from "js-cookie";
 
 import VintedLogo from "../assets/img/VintedLogo.png";
-import VintedButton from "./VintedButton";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -14,12 +14,27 @@ const Header = ({
   token,
   setToken,
 }) => {
+  const tokenCookie = Cookie.get("tokenCookie");
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearch(searchInput);
   };
   const handleChange = (e) => {
     setSearchInput(e.target.value);
+  };
+  const handleLogoutClick = () => {
+    Cookie.remove("tokenCookie");
+    setToken("");
+    history.push("/");
+  };
+  const handleLoginClick = () => {
+    setModalLogin(true);
+    document.body.classList.add("modal-open");
+  };
+  const handlePublishClick = () => {
+    history.push("/publish");
   };
   return (
     <header className="header-comp">
@@ -44,28 +59,43 @@ const Header = ({
           </div>
           <div className="header-div2">
             {token ? (
-              <VintedButton
-                className="logout-button"
-                text="Se déconnecter"
-                setToken={setToken}
-              />
+              <button className="logout-button" onClick={handleLogoutClick}>
+                Se déconnecter
+              </button>
             ) : (
-              <>
-                {/* <VintedButton className="sign-button" text="S'inscire" /> */}
-                <VintedButton
-                  className="sign-button"
-                  text="Se connecter"
-                  setModalLogin={setModalLogin}
-                />
-              </>
+              <button className="sign-button" onClick={handleLoginClick}>
+                Se connecter
+              </button>
             )}
-
-            <VintedButton
+            <button
+              className="sell-button"
+              onClick={() => {
+                !tokenCookie ? handleLoginClick() : handlePublishClick();
+              }}
+            >
+              {/* <Link
+                to="/publish"
+                className="sell-button-link"
+                onClick={() => {
+                  !tokenCookie && handleLoginClick();
+                }}
+              > */}
+              Vends tes articles
+              {/* </Link> */}
+            </button>
+            {/* <Link
+              to="/publish"
+              className="sell-button"
+              onClick={() => console.log("clicked")}
+            >
+              Vends tes articles
+            </Link> */}
+            {/* <VintedButton
               className="sell-button"
               text="Vends tes articles"
               token={token}
               setModalLogin={setModalLogin}
-            />
+            /> */}
           </div>
         </div>
       </div>

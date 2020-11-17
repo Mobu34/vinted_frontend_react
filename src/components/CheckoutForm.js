@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
-import Cookie from "js-cookie";
 
 const CheckoutForm = ({ setCompleted, fullName, offer }) => {
   const stripe = useStripe(),
@@ -43,7 +42,12 @@ const CheckoutForm = ({ setCompleted, fullName, offer }) => {
   return (
     <form onSubmit={handleSubmit} className="CheckoutForm">
       <CardElement />
-      <button type="submit">Valider</button>
+      <div className="CheckoutForm-submit-btn-container">
+        {" "}
+        <button type="submit" className="CheckoutForm-submit-btn">
+          Valider
+        </button>
+      </div>
     </form>
   );
 };
