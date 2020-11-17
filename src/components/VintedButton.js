@@ -1,6 +1,6 @@
 import React from "react";
 import Cookie from "js-cookie";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const VintedButton = ({
   className,
@@ -9,15 +9,25 @@ const VintedButton = ({
   setToken,
   type,
   token,
+  id,
 }) => {
+  const tokenCookie = Cookie.get("tokenCookie");
+
   const handleClick = () => {
-    if (setModalLogin && !token) {
+    if (text === "Se connecter") {
       setModalLogin(true);
       document.body.classList.add("modal-open");
-    } else if (setToken) {
+    } else if (text === "Se déconnecter") {
       Cookie.remove("tokenCookie");
       setToken("");
-    } else if (!token && !type) {
+    } else if (text === "Vends tes articles" && !token) {
+      setModalLogin(true);
+      document.body.classList.add("modal-open");
+    } else if (text === "Acheter" && tokenCookie) {
+      console.log(id);
+      console.log(tokenCookie);
+      console.log(text);
+    } else if (text === "Acheter") {
       setModalLogin(true);
       document.body.classList.add("modal-open");
     }
@@ -28,8 +38,12 @@ const VintedButton = ({
       onClick={handleClick}
       type={type ? type : null}
     >
-      {token ? (
+      {text === "Vends tes articles" && token ? (
         <Link to="/publish" className="link">
+          {text}
+        </Link>
+      ) : text === "Acheter" && tokenCookie ? (
+        <Link to={`/payment/${id}`} className="link">
           {text}
         </Link>
       ) : (

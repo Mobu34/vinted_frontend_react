@@ -8,6 +8,7 @@ import Offer from "./containers/Offer";
 import Signup from "./containers/Signup";
 import Home from "./containers/Home";
 import Publish from "./containers/Publish";
+import Payment from "./containers/Payment";
 import Modal from "./components/Modal";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -48,13 +49,16 @@ const App = () => {
           <Home search={search} />
         </Route>
         <Route path="/offer/:id">
-          <Offer />
+          <Offer setModalLogin={setModalLogin} />
         </Route>
         <Route path="/signup">
           <Signup connect={connect} />
         </Route>
         <Route path="/publish">
           <Publish />
+        </Route>
+        <Route path="/payment/:id">
+          <Payment />
         </Route>
       </Switch>
       {modalLogin && <Modal setModalLogin={setModalLogin} connect={connect} />}

@@ -21,6 +21,7 @@ h2 {
 .link {
   color: #000;
   text-decoration: none;
+  background-color: brown;
 }
 
 /* COMMUN */
@@ -570,4 +571,41 @@ h2 {
   font-weight: 300;
   color: #2db1bb;
   cursor: pointer;
+}
+
+.Payment {
+  margin-top: 50px;
+}
+.Payment-container {
+  width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+}
+.Payment-container > div:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+.Payment-details-container {
+  padding-bottom: 20px;
+}
+.Payment-summary {
+  margin-bottom: 20px;
+}
+.Payment-details-order-container,
+.Payment-details-protection-container,
+.Payment-details-charge-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.Payment-total_totaltext-container {
+  padding: 20px 0;
+}
+.Payment-total-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.CheckoutForm {
+  margin-top: 20px;
 }

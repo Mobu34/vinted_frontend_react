@@ -4,7 +4,7 @@ import axios from "axios";
 
 import MainOffer from "../components/MainOffer";
 
-const Offer = () => {
+const Offer = ({ setModalLogin }) => {
   const [offer, setOffer] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
@@ -26,7 +26,11 @@ const Offer = () => {
 
   return (
     <div className="offer-page">
-      {isLoading ? "Chargement en cours ..." : <MainOffer offer={offer} />}
+      {isLoading ? (
+        "Chargement en cours ..."
+      ) : (
+        <MainOffer offer={offer} setModalLogin={setModalLogin} />
+      )}
     </div>
   );
 };

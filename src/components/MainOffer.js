@@ -3,7 +3,7 @@ import React from "react";
 import VintedButton from "./VintedButton";
 import OfferDetail from "./OfferDetail";
 
-const MainOffer = ({ offer }) => {
+const MainOffer = ({ offer, setModalLogin }) => {
   return (
     <div className="main-offer-comp">
       <div className="wrapper">
@@ -33,7 +33,12 @@ const MainOffer = ({ offer }) => {
               <p>{offer.product_description}</p>
               <span>{offer.owner.account.username}</span>
             </div>
-            <VintedButton className="buy-button" text="Acheter" />
+            <VintedButton
+              className="buy-button"
+              text="Acheter"
+              id={offer._id}
+              setModalLogin={setModalLogin}
+            />
           </div>
         </div>
       </div>

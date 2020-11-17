@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 import TitleForm from "./TitleForm";
 import InputForm from "./InputForm";
@@ -13,7 +13,7 @@ const Modal = ({ setModalLogin, connect }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log(setModalLogin);
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +42,8 @@ const Modal = ({ setModalLogin, connect }) => {
   const handleClick = () => {
     setModalLogin(false);
     document.body.classList.remove("modal-open");
+    console.log("handleClick");
+    history.push("/payment/test");
   };
 
   return (
