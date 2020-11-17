@@ -27,6 +27,7 @@ const Publish = () => {
     console.log(acceptedFiles);
     const objURL = URL.createObjectURL(acceptedFiles[0]);
     setPicture(objURL);
+    setFile(acceptedFiles[0]);
     setIsDragActive(!isDragActive);
   }, []);
 
@@ -69,7 +70,12 @@ const Publish = () => {
   //   console.log(e.target.files);
   //   setFile(e.target.files[0]);
   // };
-  // console.log(file);
+
+  const handleClick = () => {
+    setPicture("");
+    setFile({});
+    setIsDragActive(!isDragActive);
+  };
 
   return (
     <div className="Publish">
@@ -98,10 +104,7 @@ const Publish = () => {
                     alt={picture.name}
                     className="Publish-img"
                   />
-                  <span
-                    className="Publish-img-delete"
-                    onClick={() => setIsDragActive(!isDragActive)}
-                  >
+                  <span className="Publish-img-delete" onClick={handleClick}>
                     X
                   </span>
                 </div>
