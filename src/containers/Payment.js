@@ -4,6 +4,7 @@ import { Redirect, useParams, useHistory } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
+import Loader from "react-loader-spinner";
 
 import CheckoutForm from "../components/CheckoutForm";
 
@@ -50,9 +51,13 @@ const Payment = () => {
 
   return token ? (
     <div className="Payment">
-      <div className="Payment-container">
+      <div
+        className={
+          isLoading ? "isLoading-Payment-container" : "Payment-container"
+        }
+      >
         {isLoading ? (
-          "Chargement en cours"
+          <Loader type="Rings" color="#2db1bb" height={100} width={100} />
         ) : completed ? (
           <span onClick={redirectionHomepage()}>
             Paiement effectué, vous allez être redirigé vers la page
@@ -106,6 +111,7 @@ const Payment = () => {
                   setCompleted={setCompleted}
                   offer={offer}
                   fullName={fullName}
+                  setIsLoading={setIsLoading}
                 />
               </Elements>
             </div>

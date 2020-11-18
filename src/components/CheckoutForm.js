@@ -8,7 +8,6 @@ const CheckoutForm = ({ setCompleted, fullName, offer }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       // on récupère ici les données bancaires que l'user rentre
       const cardElement = elements.getElement(CardElement);

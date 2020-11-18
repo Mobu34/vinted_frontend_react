@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Cookie from "js-cookie";
 
@@ -16,6 +16,10 @@ const Header = ({
 }) => {
   const tokenCookie = Cookie.get("tokenCookie");
   const history = useHistory();
+
+  const [isHamburgerMenuDisplayed, setIsHamburgerMenuDisplayed] = useState(
+    false
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +40,27 @@ const Header = ({
   const handlePublishClick = () => {
     history.push("/publish");
   };
+  const handleHamburgerMenuClick = (text) => {
+    if (isHamburgerMenuDisplayed) {
+      setIsHamburgerMenuDisplayed(false);
+      if (text === "Se déconnecter") {
+        handleLogoutClick();
+      } else if (text === "Se connecter") {
+        handleLoginClick();
+      } else if (text === "Vends tes articles") {
+        !tokenCookie ? handleLoginClick() : handlePublishClick();
+      }
+    } else {
+      setIsHamburgerMenuDisplayed(true);
+    }
+  };
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768 && isHamburgerMenuDisplayed) {
+      setIsHamburgerMenuDisplayed(false);
+    }
+  });
+
   return (
     <header className="header-comp">
       <div className="wrapper">
@@ -73,32 +98,48 @@ const Header = ({
                 !tokenCookie ? handleLoginClick() : handlePublishClick();
               }}
             >
-              {/* <Link
-                to="/publish"
-                className="sell-button-link"
-                onClick={() => {
-                  !tokenCookie && handleLoginClick();
-                }}
-              > */}
               Vends tes articles
-              {/* </Link> */}
             </button>
-            {/* <Link
-              to="/publish"
-              className="sell-button"
-              onClick={() => console.log("clicked")}
+            <div
+              className="hamburger-menu-btn"
+              onClick={handleHamburgerMenuClick}
             >
-              Vends tes articles
-            </Link> */}
-            {/* <VintedButton
-              className="sell-button"
-              text="Vends tes articles"
-              token={token}
-              setModalLogin={setModalLogin}
-            /> */}
+              <FontAwesomeIcon icon="bars" />
+            </div>
           </div>
         </div>
       </div>
+      {isHamburgerMenuDisplayed && (
+        <div className="hamburger-menu-container">
+          {token ? (
+            <div className="hamburger-menu-logout-btn-container">
+              <div
+                className="hamburger-menu-logout-btn"
+                onClick={() => handleHamburgerMenuClick("Se déconnecter")}
+              >
+                Se déconnecter
+              </div>
+            </div>
+          ) : (
+            <div className="hamburger-menu-login-btn-container">
+              <div
+                className="hamburger-menu-login-btn"
+                onClick={() => handleHamburgerMenuClick("Se connecter")}
+              >
+                Se connecter
+              </div>
+            </div>
+          )}
+          <div className="hamburger-menu-sell-btn-container">
+            <div
+              className="hamburger-menu-sell-btn"
+              onClick={() => handleHamburgerMenuClick("Vends tes articles")}
+            >
+              Vends tes articles
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

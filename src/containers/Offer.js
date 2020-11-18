@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Loader from "react-loader-spinner";
 
 import MainOffer from "../components/MainOffer";
 
@@ -25,9 +26,9 @@ const Offer = ({ setModalLogin }) => {
   }, [setOffer, setIsLoading, id]);
 
   return (
-    <div className="offer-page">
+    <div className={isLoading ? "offer-page" : ""}>
       {isLoading ? (
-        "Chargement en cours ..."
+        <Loader type="Rings" color="#2db1bb" height={100} width={100} />
       ) : (
         <MainOffer offer={offer} setModalLogin={setModalLogin} />
       )}

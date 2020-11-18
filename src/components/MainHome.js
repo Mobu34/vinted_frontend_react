@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Loader from "react-loader-spinner";
 
 import PriceFilter from "./PriceFilter";
 import Sort from "./Sort";
@@ -110,16 +111,18 @@ const MainHome = ({ isLoading, offers, pages, slicedPage }) => {
             </div>
           </div>
         </div>
-        <div className="offer-list">
-          {isLoading
-            ? "En cours de chargement ..."
-            : offers.offers.map((offer, index) => {
-                return (
-                  <Link to={`/offer/${offer._id}`} key={index} className="link">
-                    <OfferItem index={index} offer={offer} />
-                  </Link>
-                );
-              })}
+        <div className={isLoading ? "isLoading-offer-list" : "offer-list"}>
+          {isLoading ? (
+            <Loader type="Rings" color="#2db1bb" height={100} width={100} />
+          ) : (
+            offers.offers.map((offer, index) => {
+              return (
+                <Link to={`/offer/${offer._id}`} key={index} className="link">
+                  <OfferItem index={index} offer={offer} />
+                </Link>
+              );
+            })
+          )}
         </div>
         <div className="page-container">
           {pages.map((item, index) => {

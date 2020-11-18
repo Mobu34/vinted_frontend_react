@@ -16,8 +16,9 @@ import {
   faSearch,
   faTimes,
   faSortDown,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faSearch, faTimes, faSortDown);
+library.add(faSearch, faTimes, faSortDown, faBars);
 
 const App = () => {
   const cookie = Cookie.get("tokenCookie");

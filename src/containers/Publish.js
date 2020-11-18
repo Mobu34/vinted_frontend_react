@@ -3,6 +3,7 @@ import Cookie from "js-cookie";
 import axios from "axios";
 import { Redirect, useHistory } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
+import Loader from "react-loader-spinner";
 
 import PublishInput from "../components/PublishInput";
 
@@ -18,6 +19,7 @@ const Publish = () => {
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState(0);
   const [isDragActive, setIsDragActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const token = Cookie.get("tokenCookie");
 
@@ -45,6 +47,7 @@ const Publish = () => {
   formData.append("product_price", price);
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -73,99 +76,103 @@ const Publish = () => {
   };
 
   return token ? (
-    <div className="Publish">
-      <div className="wrapper">
-        <h1 className="Publish-title">Vends ton article</h1>
-        <form onSubmit={handleSubmit} className="Publish-form">
-          <div className="Publish-file-container">
-            <div className="Publish-file-subcontainer">
-              {isDragActive ? (
-                <div className="Publish-img-container">
-                  <img
-                    src={picture}
-                    alt={picture.name}
-                    className="Publish-img"
-                  />
-                  <span className="Publish-img-delete" onClick={handleClick}>
-                    X
-                  </span>
-                </div>
-              ) : (
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <p className="Publish-file-label">Ajoute une photo</p>
-                </div>
-              )}
+    isLoading ? (
+      <Loader type="Rings" color="#2db1bb" height={100} width={100} />
+    ) : (
+      <div className="Publish">
+        <div className="wrapper">
+          <h1 className="Publish-title">Vends ton article</h1>
+          <form onSubmit={handleSubmit} className="Publish-form">
+            <div className="Publish-file-container">
+              <div className="Publish-file-subcontainer">
+                {isDragActive ? (
+                  <div className="Publish-img-container">
+                    <img
+                      src={picture}
+                      alt={picture.name}
+                      className="Publish-img"
+                    />
+                    <span className="Publish-img-delete" onClick={handleClick}>
+                      X
+                    </span>
+                  </div>
+                ) : (
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <p className="Publish-file-label">Ajoute une photo</p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="Publish-title_desc-container">
-            <PublishInput
-              name="title"
-              text="Titre"
-              placeholder="ex: Chemise Sézane verte"
-              state={title}
-              setState={setTitle}
-            />
-            <PublishInput
-              name="description"
-              text="Décris ton article"
-              placeholder="ex: porté quelques fois, taille correctement"
-              state={description}
-              setState={setDescription}
-            />
-          </div>
-          <div className="Publish-details-container">
-            <PublishInput
-              name="brand"
-              text="Marque"
-              placeholder="ex: Zara"
-              state={brand}
-              setState={setBrand}
-            />
-            <PublishInput
-              name="size"
-              text="Taille"
-              placeholder="ex: L / 40 / 12"
-              state={size}
-              setState={setSize}
-            />
-            <PublishInput
-              name="color"
-              text="Couleur"
-              placeholder="ex: Fushia"
-              state={color}
-              setState={setColor}
-            />
-            <PublishInput
-              name="condition"
-              text="État"
-              placeholder="ex: Neuf avec étiquette"
-              state={condition}
-              setState={setCondition}
-            />
-            <PublishInput
-              name="location"
-              text="Lieu"
-              placeholder="ex: Paris"
-              state={location}
-              setState={setLocation}
-            />
-          </div>
-          <div className="Publish-price-container">
-            <PublishInput
-              name="price"
-              text="Prix"
-              placeholder="0,00 €"
-              state={price}
-              setState={setPrice}
-            />
-          </div>
-          <div className="Publish-submit">
-            <button type="submit"> Ajouter</button>
-          </div>
-        </form>
+            <div className="Publish-title_desc-container">
+              <PublishInput
+                name="title"
+                text="Titre"
+                placeholder="ex: Chemise Sézane verte"
+                state={title}
+                setState={setTitle}
+              />
+              <PublishInput
+                name="description"
+                text="Décris ton article"
+                placeholder="ex: porté quelques fois, taille correctement"
+                state={description}
+                setState={setDescription}
+              />
+            </div>
+            <div className="Publish-details-container">
+              <PublishInput
+                name="brand"
+                text="Marque"
+                placeholder="ex: Zara"
+                state={brand}
+                setState={setBrand}
+              />
+              <PublishInput
+                name="size"
+                text="Taille"
+                placeholder="ex: L / 40 / 12"
+                state={size}
+                setState={setSize}
+              />
+              <PublishInput
+                name="color"
+                text="Couleur"
+                placeholder="ex: Fushia"
+                state={color}
+                setState={setColor}
+              />
+              <PublishInput
+                name="condition"
+                text="État"
+                placeholder="ex: Neuf avec étiquette"
+                state={condition}
+                setState={setCondition}
+              />
+              <PublishInput
+                name="location"
+                text="Lieu"
+                placeholder="ex: Paris"
+                state={location}
+                setState={setLocation}
+              />
+            </div>
+            <div className="Publish-price-container">
+              <PublishInput
+                name="price"
+                text="Prix"
+                placeholder="0,00 €"
+                state={price}
+                setState={setPrice}
+              />
+            </div>
+            <div className="Publish-submit">
+              <button type="submit"> Ajouter</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    )
   ) : (
     <Redirect to="/" />
   );
